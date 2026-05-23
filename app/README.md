@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# Smart Task Manager (Full Stack)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🚀 Tech Stack
+- Frontend: React.js (TypeScript, MUI)
+- Backend: Node.js + Express + TypeScript
+- Database: MySQL
+- Auth: JWT
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📌 Features
+- User Signup & Login (JWT authentication)
+- Protected Routes
+- Task CRUD (Create, Read, Update, Delete)
+- User-specific task management
+- Clean UI using Material UI
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🧠 Architecture
+- Controller → Service → DB
+- Middleware for authentication
+- Axios interceptor for token handling
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🔐 Authentication Flow
+1. User logs in → gets JWT token
+2. Token stored in localStorage
+3. Token sent in headers
+4. Backend verifies token
+5. Access granted to protected routes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📂 Project Structure
+api/
+controllers/
+services/
+routes/
+middleware/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+app/
+pages/
+components/
+services/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ⚙️ Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Backend
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+cd api
+npm install
+npm run dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Frontend
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+cd app
+npm install
+npm start
