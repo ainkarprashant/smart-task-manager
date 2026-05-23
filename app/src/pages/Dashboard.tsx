@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
 
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  Box
+} from "@mui/material";
+
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
@@ -9,7 +18,6 @@ export default function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    // ❌ If no token → redirect
     if (!token) {
       navigate("/");
       return;
@@ -19,28 +27,35 @@ export default function Dashboard() {
   }, []);
 
   const fetchTasks = async () => {
-    try {
-      const res = await API.get("/api/tasks");
-      setTasks(res.data);
-    } catch (err) {
-      console.error(err);
-    }
+    const res = await API.get("/api/tasks");
+    setTasks(res.data);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
-    <div>
-      <h2>Tasks</h2>
-      <button onClick={() => {
-  localStorage.removeItem("token");
-  navigate("/");
-}}>
-  Logout
-</button>
+    <Container>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
+        <Typography variant="h4">Dashboard</Typography>
+        <Button variant="outlined" onClick={logout}>
+          Logout
+        </Button>
+      </Box>
+
       {tasks.map((task: any) => (
-        <div key={task.id}>
-          <p>{task.title}</p>
-        </div>
+        <Card key={task.id} sx={{ marginTop: 2 }}>
+          <CardContent>
+            <Typography variant="h6">{task.title}</Typography>
+            <Typography>{task.description}</Typography>
+            <Typography color="text.secondary">
+              Priority: {task.priority}
+            </Typography>
+          </CardContent>
+        </Card>
       ))}
-    </div>
+    </Container>
   );
 }
