@@ -1,10 +1,13 @@
 import express from "express";
 import authRoutes from "./routes/auth.routes";
+import { authMiddleware } from "./middleware/auth.middleware";
+import taskRoutes from "./routes/task.routes";
 
 const app = express();
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
 
 // ROOT ROUTE
 app.get("/", (req, res) => {
@@ -16,6 +19,13 @@ app.get("/", (req, res) => {
 app.get("/test", (req, res) => {
   console.log("Test API hit");
   res.json({ message: "API is working 🚀" });
+});
+
+app.get("/protected", authMiddleware, (req, res) => {
+  res.json({
+    message: "Protected route accessed 🔐",
+    user: (req as any).user
+  });
 });
 
 export default app;
